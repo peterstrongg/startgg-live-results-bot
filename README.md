@@ -1,1 +1,1 @@
-"# startgg-live-results-bot" 
+# startgg-live-results-bot
