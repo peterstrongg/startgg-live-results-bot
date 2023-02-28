@@ -18,11 +18,6 @@ const getEventId = (tournamentName, eventName) => {
             query,
             variables: {
                 slug: eventSlug,
-                tourneySlug: "bair-trap-23-air-jordan",
-                eventSlug: "ultimate-singles",
-                eventId: 78790,
-                page: 1,
-                perPage: 3
             }
         })
     }).then(response => {
