@@ -1,3 +1,2 @@
-const { startggApiKey } = require("../config.json");
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-const url = "https://api.start.gg/gql/alpha";
+const { getEventId } = require("../api/getEventId");
+getEventId("bair-trap-23-air-jordan", "ultimate-singles");
