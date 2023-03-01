@@ -31,6 +31,4 @@ const getEventId = (tournamentName, eventName) => {
     });
 }
 
-getEventId("bair-trap-23-air-jordan", "ultimate-singles").then(response => console.log(response.event.id));
-
 exports.getEventId = getEventId;
