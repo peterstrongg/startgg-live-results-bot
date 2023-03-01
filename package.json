@@ -12,6 +12,6 @@
   "dependencies": {
     "discord.js": "^14.7.1",
     "discord.py": "^1.0.0",
-    "node-fetch": "^3.2.10"
+    "node-fetch": "^3.3.0"
   }
 }
