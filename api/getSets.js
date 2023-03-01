@@ -3,31 +3,24 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const url = "https://api.start.gg/gql/alpha";
 
 const query = `
-query EventSets($eventId: ID!, $page: Int!, $perPage: Int!) {
-    event(id: $eventId) {
-      id
-      name
-      sets(
-        page: $page
-        perPage: $perPage
-        sortType: STANDARD
-      ) {
-        pageInfo {
-          total
-        }
-        nodes {
+query EventStandings($eventId: ID!, $page: Int!, $perPage: Int!) {
+  event(id: $eventId) {
+    id
+    name
+    standings(query: {
+      perPage: $perPage,
+      page: $page
+    }){
+      nodes {
+        placement
+        entrant {
           id
-          slots {
-            id
-            entrant {
-              id
-              name
-            }
-          }
+          name
         }
       }
     }
   }
+}
 `
 
 const getSets = (eventId) => {
@@ -44,7 +37,7 @@ const getSets = (eventId) => {
                     variables: {
                         eventId,
                         page: 1,
-                        perPage: 100
+                        perPage: 64
                 }
             })
         }).then(response => {
@@ -56,6 +49,5 @@ const getSets = (eventId) => {
         })
     });
 }
-getSets(868290).then(response => console.log(response.event.sets.nodes[30].slots[1]))
 
 exports.getSets = getSets
