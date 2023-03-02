@@ -2,30 +2,19 @@ const { SlashCommandBuilder } = require('discord.js');
 const { getEventId } = require("../api/getEventId");
 const { getSets } = require("../api/getSets");
 
-const getResults = () => { 
-	getEventId("bair-trap-23-air-jordan", "ultimate-singles").then(response => {
-		getSets(response.event.id).then(r => {
-			return r.event.standings.nodes;
-		});
-	});
-}
-
-getResults();
-
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('getid')
-		.setDescription('Replies with Pong!'),
+		.setName('getresults')
+		.setDescription('Returns results of a startgg bracket'),
 	async execute(interaction) {
 		let id = await getEventId("bair-trap-23-air-jordan", "ultimate-singles").then(response => {return response.event.id});
 		let results = await getSets(id).then(response => {
 			let res = response.event.standings.nodes;
 			let resultsString = "";
 			for(let i = 0; i < res.length; i++) {
-				resultsString.concat((res[i].entrant.name).toString());
+				resultsString = resultsString + (res[i].entrant.name).toString() + "\n";
 			}
-			console.log(resultsString);
-			return response.event.standings.nodes[0].entrant.name;
+			return resultsString;
 		});
 		await interaction.reply(results);
 	},
