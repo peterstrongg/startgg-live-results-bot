@@ -5,7 +5,7 @@ const { getSets } = require("../api/getSets");
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('getresults')
-		.setDescription('Returns results of a startgg bracket')
+		.setDescription('Retrieves top 64 results of a given tournament')
 		.addStringOption(option =>
 			option.setName('tournamentname')
 				.setDescription('Name of tournament')
@@ -21,7 +21,7 @@ module.exports = {
 		const eventName = interaction.options.getString('eventname');
 
 		let id = await getEventId(tournamentName, eventName).then(response => {return response.event.id});
-		
+
 		let results = await getSets(id).then(response => {
 			let res = response.event.standings.nodes;
 			let resultsString = "";
