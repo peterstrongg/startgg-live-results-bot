@@ -24,9 +24,10 @@ module.exports = {
 
 		let results = await getSets(id).then(response => {
 			let res = response.event.standings.nodes;
+			console.log(res)
 			let resultsString = "";
 			for(let i = 0; i < res.length; i++) {
-				resultsString = resultsString + (res[i].entrant.name).toString() + "\n";
+				resultsString = resultsString + (res[i].placement).toString() + ". " + (res[i].entrant.name).toString() + "\n";
 			}
 			return resultsString;
 		});
